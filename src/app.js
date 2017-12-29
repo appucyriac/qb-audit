@@ -2,6 +2,7 @@ import Login from './components/Login'
 import Auditee from './components/Auditee'
 import React from 'react'
 import { Button } from 'rmwc/Button';
+import { Tabs } from 'rmwc/Tabs';
 import ReactDOM from 'react-dom'
 import {
   BrowserRouter,
@@ -15,10 +16,11 @@ const App = () => (
   <div>
     <nav>
       <Link to="/login"><Button>Login</Button></Link>
-       <Link to="/login"><Button>About</Button></Link>
+       <Link to="/"><Button>Home</Button></Link>
     </nav>
     <div>
       <Route path="/login" component={Login}/>
+      <Route path="/auditee" component={Auditee}/>
     </div>
   </div>
 )

@@ -33,8 +33,7 @@ module.exports = {
         // Check out https://github.com/jantimon/html-webpack-plugin
         // for the full list of options.
         new HtmlPlugin({
-          template: 'index.html',
-          template: 'auditee/auditee-home.html'
+          template: 'index.html'
         }),
         new ExtractTextPlugin('style.bundle.css'),
       ]

@@ -7,9 +7,38 @@ import { TextField } from 'rmwc/TextField';
 import { Checkbox } from 'rmwc/Checkbox';
 import { Elevation } from 'rmwc/Elevation';
 import { Typography } from 'rmwc/Typography';
+import DataTables from 'material-ui-datatables';
 import { Grid,GridCell } from 'rmwc/Grid';
 import { Snackbar } from 'rmwc/Snackbar';
 import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider' 
+const TABLE_COLUMNS = [
+  {
+    key: 'rating',
+    label: 'Rating',
+  }, {
+    key: 'duration',
+    label: 'Duration',
+  },
+  {
+    key: 'comment',
+    label: 'Comment',
+  }
+]
+ 
+const TABLE_DATA = [
+  {
+    rating: '3',
+    duration: 'April 2017 - November 2017',
+    comment: 'Half Yearly'
+  }, {
+    rating: '4',
+    duration: 'December 2016 - April 2017',
+    comment: 'Half Yearly'
+   
+  }
+
+]
 class Auditee extends React.Component {
 	constructor(props) {
     super(props);
@@ -22,6 +51,9 @@ class Auditee extends React.Component {
 	componentDidMount() {
 
 		this.setState({snackbarIsOpen: !this.state.snackbarIsOpen})
+  }
+  handleCellClick(key,value){
+
   }
  render() {
     return (
@@ -45,23 +77,28 @@ class Auditee extends React.Component {
 	 			</CardPrimary>
 	     </Card>
 	        <Typography use="title">List of ratings</Typography>
-			<Grid>
-				<GridCell span="4"><Typography use="subheading2">Rating</Typography>
-					<GridCell span="4">3</GridCell>
-			    </GridCell>
-				<GridCell span="4"><Typography use="subheading2">Duration</Typography>
-				    <GridCell span="4">April 2017 - October 2017</GridCell>
-				</GridCell>
-				<GridCell span="4"><Typography use="subheading2">Comments</Typography>
-				    <GridCell span="4">Half yearly</GridCell>
-				</GridCell>
+	        <MuiThemeProvider> 
+		      <DataTables
+		        height={'auto'}
+		        selectable={true}
+		        showRowHover={true}
+		        columns={TABLE_COLUMNS}
+		        data={TABLE_DATA}
+		        showCheckboxes={false}
+		        onCellClick={this.handleCellClick}
+		        onCellDoubleClick={this.handleCellDoubleClick}
+		        onFilterValueChange={this.handleFilterValueChange}
+		        onSortOrderChange={this.handleSortOrderChange}
+		        page={1}
+		        count={100}
+		      />
+		      </MuiThemeProvider>
 				<Snackbar
 					show={this.state.snackbarIsOpen}
 					onClose={evt => this.setState({snackbarIsOpen: false})}
 					message="Welcome"
 					actionText="Dismiss"
 		        />
-			</Grid>
       </div>
     );
   }

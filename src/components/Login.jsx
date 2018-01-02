@@ -28,7 +28,7 @@ class Login extends React.Component {
   handleSubmit(event) {
   
     console.log(this.state) ;
-    if(this.state.username == "auditee")
+    if(this.state.username == "auditee" || this.state.username == "auditor" || this.state.username == "organizer")
        this.setState({isLogged:true});
     else 
        alert("invalid username");
@@ -38,8 +38,12 @@ class Login extends React.Component {
 
   render() {
   	const logged = this.state.isLogged;
-  	if(logged)
+  	if(logged && this.state.username == "auditee")
   		 return (<Redirect from={"/login"} to={"/auditee"}/>);
+  	else if (logged && this.state.username == "auditor")
+  		 return (<Redirect from={"/login"} to={"/auditor"}/>);
+  	else if (logged && this.state.username == "organizer")
+  		 return (<Redirect from={"/login"} to={"/organizer"}/>);
   	else{
     return (
       <div className="formBox">

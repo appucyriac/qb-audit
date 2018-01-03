@@ -8,10 +8,16 @@
 
 
 }
-#submitButton{
+#loginButton{
 	display: block;
     margin-left: 50px;
     margin-top: 15px;
+
+}
+#submitButton{
+	display: block;
+    float: right;
+    margin-top: 84px;
 
 }
 .formBox{
@@ -32,6 +38,17 @@
 }
 .auditeeBox{
 	margin-top: 80px;
+	margin-left: 50px;	
+    border: 1px solid lightgray;
+    width: 800px;
+    height: 300px;
+    padding: 10px;
+    border-radius: 15px;
+    position: absolute;
+
+}
+.statusBox{
+	margin-top: 500px;
 	margin-left: 50px;	
     border: 1px solid lightgray;
     width: 800px;

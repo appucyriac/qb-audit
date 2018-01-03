@@ -1,5 +1,6 @@
-import React from 'react'
-import '../assets/css/qbaudit-styles.css'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import '../assets/css/qbaudit-styles.css';
 import '../../node_modules/material-components-web/dist/material-components-web.css'
 import { Button } from 'rmwc/Button';
 import { FormField } from 'rmwc/FormField';
@@ -11,7 +12,14 @@ import DataTables from 'material-ui-datatables';
 import { Grid,GridCell } from 'rmwc/Grid';
 import { Snackbar } from 'rmwc/Snackbar';
 import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider' 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {
+  BrowserRouter,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from 'react-router-dom'
 const TABLE_COLUMNS = [
   {
     key: 'name',
@@ -39,9 +47,9 @@ class Auditee extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
-        snackbarIsOpen:false
+        snackbarIsOpen:false,
+        cellClick:false
                   };
-    this.handleCellClick=this.handleCellClick.bind(this);
   }
 
 	
@@ -49,14 +57,17 @@ class Auditee extends React.Component {
 
 		this.setState({snackbarIsOpen: !this.state.snackbarIsOpen})
   }
-  handleCellClick(value){
-    
-     ReactDOM.render(
-     	<Redirect from={"/auditor"} to={"/questionnaire"}/>)
+  handleCellClick = (value) =>{
+     
+     	this.setState({cellClick:true});
      	
     
-  }
+  }	
  render() {
+ 	if (this.state.cellClick) {
+	 	return(<Redirect from={"/auditor"} to={"/questionnaire"}/>);
+	 	this.setState({cellClick:false});
+ }
     return (
       <div className="auditeeBox">
       <Typography use="headline" className="title">Auditor Dashboard</Typography>
@@ -78,17 +89,14 @@ class Auditee extends React.Component {
 	        <MuiThemeProvider> 
 		      <DataTables
 		        height={'auto'}
-		        selectable={true}
+		        selectable={false}
 		        showRowHover={true}
 		        columns={TABLE_COLUMNS}
 		        data={TABLE_DATA}
 		        showCheckboxes={true}
-		        onCellClick={this.handleCellClick}
-		        onCellDoubleClick={this.handleCellDoubleClick}
+		        onCellClick={this.handleCellClick.bind(this)}
 		        onFilterValueChange={this.handleFilterValueChange}
-		        onSortOrderChange={this.handleSortOrderChange}
-		        page={1}
-		        count={100}
+		        
 		      />
 		      </MuiThemeProvider>
 				<Snackbar

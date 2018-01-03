@@ -12,8 +12,8 @@ import { Grid,GridCell } from 'rmwc/Grid';
 import { Snackbar } from 'rmwc/Snackbar';
 import { Rating } from 'material-ui-rating';
 import { List,ListItem,ListItemText } from 'rmwc/List';	
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider' 
 const TABLE_COLUMNS = [
   {
     key: 'name',
@@ -23,7 +23,6 @@ const TABLE_COLUMNS = [
     label: 'Duration',
   },
 ]
- 
 const TABLE_DATA = [
   {
     name: 'Deadpool',
@@ -37,48 +36,96 @@ const TABLE_DATA = [
 
 ]
 
-class Auditee extends React.Component {
+class Questionnaire extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
-        snackbarIsOpen:false
+               rating:0,
+               snackbarIsOpen:false
                   };
   }
+ handleRating(value){
+ 	this.setState({rating:value});
+ }
+ handleSubmit(){
+   this.setState({snackbarIsOpen: true})
+ }
 
 	
-	componentDidMount() {
 
-		this.setState({snackbarIsOpen: !this.state.snackbarIsOpen})
-  }
-  handleCellClick(value){
-    
-    	return(
-    		<div className="auditeeBox">
-
-    		</div>
-    	);
-    
-  }
  render() {
     return (
       <div className="auditeeBox">
+      <MuiThemeProvider>
       <Typography use="headline" className="title">Questionnaire</Typography>
-    <List>
+       <List>
 		<ListItem ripple>
 			
 			<ListItemText>Learned in last 6 months</ListItemText>
 			<Rating
-          value={3}
+          value={this.state.rating}
           max={5}
-          onChange={(value) => console.log(`Rated with value ${value}`)}
+          onChange={this.handleRating.bind(this)}
         />
 			
 		</ListItem>
-	</List>
-          
+				<ListItem ripple>
+			
+			<ListItemText>UI Perfection</ListItemText>
+			<Rating
+          value={this.state.rating}
+          max={5}
+          onChange={this.handleRating.bind(this)}
+        />
+			
+		</ListItem>
+						<ListItem ripple>
+			
+			<ListItemText>Code Prefection</ListItemText>
+			<Rating
+          value={this.state.rating}
+          max={5}
+          onChange={this.handleRating.bind(this)}
+        />
+			
+		</ListItem>
+								<ListItem ripple>
+			
+			<ListItemText>Testing tools</ListItemText>
+			<	Rating
+          value={this.state.rating}
+          max={5}
+          onChange={this.handleRating.bind(this)}
+        />
+			
+		</ListItem>
+										<ListItem ripple>
+			
+			<ListItemText>Perfomance testing</ListItemText>
+			<Rating
+          value={this.state.rating}
+          max={5}
+          onChange={this.handleRating.bind(this)}
+        />
+			
+		</ListItem>
 
+
+	   </List>
+
+	   
+	   </MuiThemeProvider>
+
+	   <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} id="submitButton" onClick={this.handleSubmit.bind(this)}>Submit</Button>
+	   	   <Snackbar
+					show={this.state.snackbarIsOpen}
+					onClose={evt => this.setState({snackbarIsOpen: false})}
+					message="Submitted"
+					actionText="Dismiss"
+		        />
       </div>
+
     );
   }
 }
-export default Auditee
+export default Questionnaire

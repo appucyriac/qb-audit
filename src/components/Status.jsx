@@ -12,8 +12,8 @@ import DataTables from 'material-ui-datatables';
 import { Grid,GridCell } from 'rmwc/Grid';
 import { Snackbar } from 'rmwc/Snackbar';
 import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Select from 'rmwc/Select';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider' 
+const Auditor_List =[{name:'Bruce'},{name:'Peter'},{name:'Vision'}]
 const TABLE_COLUMNS = [
   {
     key: 'name',
@@ -23,13 +23,7 @@ const TABLE_COLUMNS = [
   {
     key: 'auditor',
     label: 'Auditor',
-    render: (auditor, all) => <Select
-        name="form-field-name"
-        value='value'
-        options={[
-          { value: 'Bruce', label: 'Bruce' },
-          { value: 'Peter', label: 'Peter' },
-        ]}/>
+    render: (auditor, all) => <select>{auditor}</select>
   }
 ]
  
@@ -55,8 +49,8 @@ const TABLE_STATUS_COLS = [
   },
   {
     key: 'auditor',
-    label: 'Auditor'
-    
+    label: 'Auditor',
+    render: (auditor, all) => <select>{auditor}</select>
   },
   {
     key: 'progress',
@@ -78,7 +72,7 @@ const TABLE_STATUS_COLS = [
 const TABLE_STATUS_DATA = [
   {
     name: 'Deadpool',
-    auditor:'Bruce',
+    auditor:'Auditor_List.name',
     progress:'In Progress',
     rating:'3',
     final_status:'Not Completed'
@@ -86,7 +80,7 @@ const TABLE_STATUS_DATA = [
 
   }, {
     name: 'Tony Stark',
-    auditor:'Peter',
+    auditor:'Auditor_List.name',
     progress:'In Progress',
     rating:'4',
     final_status:'Not Completed'
@@ -98,7 +92,7 @@ class Auditee extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
-        snackbarIsOpen:false,
+        snackbarIsOpen:false
         cellClick:false
                   };
     this.handleCellClick=this.handleCellClick.bind(this);
@@ -117,7 +111,7 @@ class Auditee extends React.Component {
   }
  render() {
     return (
-      <div>
+ 
       <div className="auditeeBox">
       <Typography use="headline" className="title">Organizer Dashboard</Typography>
 	      <Card className="userImage">
@@ -130,7 +124,7 @@ class Auditee extends React.Component {
 				}}>
 				</CardMedia>
 				<CardPrimary>
-					<CardTitle large>Organizer</CardTitle>
+					<CardTitle large>Auditor</CardTitle>
 					<CardSubtitle>Emp No: 123456</CardSubtitle>
 	 			</CardPrimary>
 	     </Card>
@@ -159,33 +153,8 @@ class Auditee extends React.Component {
 					actionText="Dismiss"
 		        />
       </div>
-      <div className="statusBox">
-	        <Typography use="title">Status of audits</Typography>
-	        <MuiThemeProvider> 
-		      <DataTables
-		        height={'auto'}
-		        selectable={true}
-		        showRowHover={true}
-		        columns={TABLE_STATUS_COLS}
-		        data={TABLE_STATUS_DATA}
-		        showCheckboxes={true}
-		        onCellClick={this.handleCellClick}
-		        onCellDoubleClick={this.handleCellDoubleClick}
-		        onFilterValueChange={this.handleFilterValueChange}
-		        onSortOrderChange={this.handleSortOrderChange}
-		        page={1}
-		        count={100}
-		      />
 
-		      </MuiThemeProvider>
-				<Snackbar
-					show={this.state.snackbarIsOpen}
-					onClose={evt => this.setState({snackbarIsOpen: false})}
-					message="Welcome"
-					actionText="Dismiss"
-		        />
-      </div>
-     </div>
+
     );
   }
 }

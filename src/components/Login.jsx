@@ -59,7 +59,7 @@ class Login extends React.Component {
 	            </FormField>
 		        </label>
 		        <Checkbox>Stay signed in</Checkbox>
-		        <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} id="submitButton" onClick={this.handleSubmit}>Login</Button>
+		        <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} id="loginButton" onClick={this.handleSubmit}>Login</Button>
 	      </form>
       </div>
     );

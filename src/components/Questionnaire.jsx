@@ -40,13 +40,14 @@ class Questionnaire extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
-               rating:0,
+               learning:0,
+               ui:0,
+               code:0,
+               test:0,
+               perf:0,
                snackbarIsOpen:false
                   };
   }
- handleRating(value){
- 	this.setState({rating:value});
- }
  handleSubmit(){
    this.setState({snackbarIsOpen: true})
  }
@@ -63,9 +64,9 @@ class Questionnaire extends React.Component {
 			
 			<ListItemText>Learned in last 6 months</ListItemText>
 			<Rating
-          value={this.state.rating}
+          value={this.state.learning}
           max={5}
-          onChange={this.handleRating.bind(this)}
+          onChange={(value) => this.setState({learning:value})}
         />
 			
 		</ListItem>
@@ -73,9 +74,9 @@ class Questionnaire extends React.Component {
 			
 			<ListItemText>UI Perfection</ListItemText>
 			<Rating
-          value={this.state.rating}
+          value={this.state.ui}
           max={5}
-          onChange={this.handleRating.bind(this)}
+          onChange={(value) => this.setState({ui:value})}
         />
 			
 		</ListItem>
@@ -83,9 +84,9 @@ class Questionnaire extends React.Component {
 			
 			<ListItemText>Code Prefection</ListItemText>
 			<Rating
-          value={this.state.rating}
+          value={this.state.code}
           max={5}
-          onChange={this.handleRating.bind(this)}
+          onChange={(value) => this.setState({code:value})}
         />
 			
 		</ListItem>
@@ -93,9 +94,9 @@ class Questionnaire extends React.Component {
 			
 			<ListItemText>Testing tools</ListItemText>
 			<	Rating
-          value={this.state.rating}
+          value={this.state.test}
           max={5}
-          onChange={this.handleRating.bind(this)}
+          onChange={(value) => this.setState({test:value})}
         />
 			
 		</ListItem>
@@ -103,9 +104,9 @@ class Questionnaire extends React.Component {
 			
 			<ListItemText>Perfomance testing</ListItemText>
 			<Rating
-          value={this.state.rating}
+          value={this.state.perf}
           max={5}
-          onChange={this.handleRating.bind(this)}
+          onChange={(value) => this.setState({perf:value})}
         />
 			
 		</ListItem>

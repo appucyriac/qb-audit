@@ -48,7 +48,8 @@ class Auditee extends React.Component {
     super(props);
     this.state = {
         snackbarIsOpen:false,
-        cellClick:false
+        cellClick:false,
+        clickedName:null
                   };
   }
 
@@ -57,9 +58,9 @@ class Auditee extends React.Component {
 
 		this.setState({snackbarIsOpen: !this.state.snackbarIsOpen})
   }
-  handleCellClick = (value) =>{
+  handleCellClick = (tableRow, tableColumn, dataItem, dataItemField) =>{
      
-     	this.setState({cellClick:true});
+     	this.setState({cellClick:true,clickedName:dataItem.name});
      	
     
   }	

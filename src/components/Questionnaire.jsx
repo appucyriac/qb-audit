@@ -2,18 +2,12 @@ import React from 'react'
 import '../assets/css/qbaudit-styles.css'
 import '../../node_modules/material-components-web/dist/material-components-web.css'
 import { Button } from 'rmwc/Button';
-import { FormField } from 'rmwc/FormField';
-import { TextField } from 'rmwc/TextField';
-import { Checkbox } from 'rmwc/Checkbox';
-import { Elevation } from 'rmwc/Elevation';
 import { Typography } from 'rmwc/Typography';
-import DataTables from 'material-ui-datatables';
-import { Grid,GridCell } from 'rmwc/Grid';
 import { Snackbar } from 'rmwc/Snackbar';
 import { Rating } from 'material-ui-rating';
+import RatingComponent from './RatingComponent';
 import { List,ListItem,ListItemText } from 'rmwc/List';	
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
 const TABLE_COLUMNS = [
   {
     key: 'name',
@@ -52,78 +46,49 @@ class Questionnaire extends React.Component {
    this.setState({snackbarIsOpen: true})
  }
 
-	
+handleRating = (keyLabel, rating) =>{
+  this.setState((state) => {
+      let newState = state;
+      newState[keyLabel] = rating;
+      return newState;
+  });
+}
 
  render() {
     return (
-      <div className="auditeeBox">
-      <MuiThemeProvider>
-      <Typography use="headline" className="title">Questionnaire</Typography>
-       <List>
-		<ListItem ripple>
-			
-			<ListItemText>Learned in last 6 months</ListItemText>
-			<Rating
-          value={this.state.learning}
-          max={5}
-          onChange={(value) => this.setState({learning:value})}
-        />
-			
-		</ListItem>
-				<ListItem ripple>
-			
-			<ListItemText>UI Perfection</ListItemText>
-			<Rating
-          value={this.state.ui}
-          max={5}
-          onChange={(value) => this.setState({ui:value})}
-        />
-			
-		</ListItem>
-						<ListItem ripple>
-			
-			<ListItemText>Code Prefection</ListItemText>
-			<Rating
-          value={this.state.code}
-          max={5}
-          onChange={(value) => this.setState({code:value})}
-        />
-			
-		</ListItem>
-								<ListItem ripple>
-			
-			<ListItemText>Testing tools</ListItemText>
-			<	Rating
-          value={this.state.test}
-          max={5}
-          onChange={(value) => this.setState({test:value})}
-        />
-			
-		</ListItem>
-										<ListItem ripple>
-			
-			<ListItemText>Perfomance testing</ListItemText>
-			<Rating
-          value={this.state.perf}
-          max={5}
-          onChange={(value) => this.setState({perf:value})}
-        />
-			
-		</ListItem>
-
-
-	   </List>
-
-	   
-	   </MuiThemeProvider>
-
-	   <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} id="submitButton" onClick={this.handleSubmit.bind(this)}>Submit</Button>
-	   	   <Snackbar
-					show={this.state.snackbarIsOpen}
-					onClose={evt => this.setState({snackbarIsOpen: false})}
-					message="Submitted"
-					actionText="Dismiss"
-		        />
+      <div className="auditeeBox">      
+	      <MuiThemeProvider>
+		      <Typography use="headline" className="title">Questionnaire</Typography>
+		       <List>
+				<ListItem ripple>		
+					<ListItemText>Learned in last 6 months</ListItemText>			
+		            <RatingComponent rating={this.state.learning} keyLabel="learning" func={this.handleRating}/> 			
+				</ListItem>
+				 <ListItem ripple>			
+					<ListItemText>UI Perfection</ListItemText>
+					<RatingComponent rating={this.state.ui} keyLabel="ui" func={this.handleRating}/>			
+				 </ListItem>
+				  <ListItem ripple>			
+					<ListItemText>Code Prefection</ListItemText>
+					<RatingComponent rating={this.state.code} keyLabel="code" func={this.handleRating}/> 			
+				  </ListItem>
+				 <ListItem ripple>			
+					<ListItemText>Testing tools</ListItemText>
+					<RatingComponent rating={this.state.test} keyLabel="test" func={this.handleRating}/> 			
+				 </ListItem>
+				 <ListItem ripple>			
+					<ListItemText>Perfomance testing</ListItemText>
+					<RatingComponent rating={this.state.perf} keyLabel="perf" func={this.handleRating}/> 
+		     	 </ListItem>
+			   </List>
+		   </MuiThemeProvider>
+		   <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} id="submitButton" onClick={this.handleSubmit.bind(this)}>Submit</Button>
+		   	   <Snackbar
+						show={this.state.snackbarIsOpen}
+						onClose={evt => this.setState({snackbarIsOpen: false})}
+						message="Submitted"
+						actionText="Dismiss"
+			        />
       </div>
 
     );

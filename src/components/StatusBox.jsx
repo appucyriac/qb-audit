@@ -16,6 +16,7 @@ import {
 } from 'rmwc/Dialog';
 import Status from './Status';
 import get from 'lodash/get';
+import filter from 'lodash/filter';
 const TABLE_STATUS_COLS = [
   {
     key: 'name',
@@ -69,7 +70,7 @@ constructor(props) {
     this.state = {
         simpleDialogIsOpen:false,
         clickedName:null,
-        filterValue:null
+        searchResults:TABLE_STATUS_DATA,
                   };
   }
 onCellClick(tableRow, tableColumn, dataItem, dataItemField){
@@ -77,6 +78,15 @@ onCellClick(tableRow, tableColumn, dataItem, dataItemField){
 
 	
 }
+handleFilterValueChange(args) {
+    debugger
+    if(args==null|| args=="")
+    	this.setState({searchResults:TABLE_STATUS_DATA});
+    else
+    {
+     let results = filter(TABLE_STATUS_DATA,{'name':args});
+     this.setState({searchResults:results});
+  }}
   render() {
     return (
         <div className="statusBox">
@@ -87,7 +97,7 @@ onCellClick(tableRow, tableColumn, dataItem, dataItemField){
 		        selectable={false}
 		        showRowHover={true}
 		        columns={TABLE_STATUS_COLS}
-		        data={TABLE_STATUS_DATA}
+		        data={this.state.searchResults}
 		        showCheckboxes={false}
 		        showHeaderToolbar
 		        onCellClick={this.onCellClick.bind(this)}

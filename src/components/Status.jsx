@@ -17,6 +17,16 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 const Auditor_List =[{name:'Bruce'},{name:'Peter'},{name:'Vision'}]
 
 class Status extends React.Component {
+constructor(props) {
+    super(props);
+    this.state = {
+      completed:"Not Completed"
+                  };
+  }
+handleCompleted(value){
+  debugger
+ this.setState({completed:"Completed"});
+}
 
  render() {
     return (
@@ -29,17 +39,14 @@ class Status extends React.Component {
              <ListItem ripple>      
               <ListItemText>Inprogress</ListItemText>
              </ListItem>
-            <ListItem ripple>     
-              <ListItemText>Code Prefection</ListItemText>
-            </ListItem>
             <ListItem ripple>      
               <ListItemText>Aggregate rating</ListItemText>       
             </ListItem>
             <ListItem ripple>      
-              <ListItemText>Not Completed</ListItemText>          
+              <ListItemText>{this.state.completed}</ListItemText>          
              </ListItem>
          </List>
-		      <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} className="assignButton">Mark as completed</Button>
+		      <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} className="assignButton" onClick={this.handleCompleted.bind(this)}>Mark as completed</Button>
 		      </MuiThemeProvider>
       </div>
     );

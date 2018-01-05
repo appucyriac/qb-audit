@@ -3,16 +3,24 @@ import ReactDOM from 'react-dom';
 import '../assets/css/qbaudit-styles.css';
 import '../../node_modules/material-components-web/dist/material-components-web.css'
 import { Button } from 'rmwc/Button';
-import { FormField } from 'rmwc/FormField';
-import { TextField } from 'rmwc/TextField';
-import { Checkbox } from 'rmwc/Checkbox';
-import { Elevation } from 'rmwc/Elevation';
 import { Typography } from 'rmwc/Typography';
 import DataTables from 'material-ui-datatables';
-import { Grid,GridCell } from 'rmwc/Grid';
 import { Snackbar } from 'rmwc/Snackbar';
 import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Questionnaire from './Questionnaire';
+import {
+  Dialog,
+  DefaultDialogTemplate,
+  DialogRoot,
+  DialogSurface,
+  DialogHeader,
+  DialogHeaderTitle,
+  DialogBody,
+  DialogFooter,
+  DialogFooterButton,
+  DialogBackdrop
+} from 'rmwc/Dialog';
 import {
   BrowserRouter,
   Route,
@@ -49,7 +57,8 @@ class Auditee extends React.Component {
     this.state = {
         snackbarIsOpen:false,
         cellClick:false,
-        clickedName:null
+        clickedName:null,
+        simpleDialogIsOpen:false
                   };
   }
 
@@ -65,10 +74,6 @@ class Auditee extends React.Component {
     
   }	
  render() {
- 	if (this.state.cellClick) {
-	 	return(<Redirect from={"/auditor"} to={"/questionnaire"}/>);
-	 	this.setState({cellClick:false});
- }
     return (
       <div className="auditeeBox">
       <Typography use="headline" className="title">Auditor Dashboard</Typography>
@@ -106,6 +111,23 @@ class Auditee extends React.Component {
 					message="Welcome"
 					actionText="Dismiss"
 		        />
+		      <Dialog
+  open={this.state.cellClick}
+  onClose={evt => this.setState({cellClick: false})}
+>
+  <DialogRoot>
+    <DialogSurface>
+        <DialogHeader>
+          <DialogHeaderTitle>Questionnaire for {this.state.clickedName}</DialogHeaderTitle>
+        </DialogHeader>
+        <DialogBody><Questionnaire/></DialogBody>
+        <DialogFooter>
+            <DialogFooterButton cancel>Cancel</DialogFooterButton>
+        </DialogFooter>
+    </DialogSurface>
+    <DialogBackdrop />
+  </DialogRoot>
+</Dialog>
       </div>
     );
   }

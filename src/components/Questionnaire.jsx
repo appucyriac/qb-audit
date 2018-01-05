@@ -56,9 +56,8 @@ handleRating = (keyLabel, rating) =>{
 
  render() {
     return (
-      <div className="auditeeBox">      
+      <div>      
 	      <MuiThemeProvider>
-		      <Typography use="headline" className="title">Questionnaire</Typography>
 		       <List>
 				<ListItem ripple>		
 					<ListItemText>Learned in last 6 months</ListItemText>			

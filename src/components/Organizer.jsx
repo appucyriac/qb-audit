@@ -19,14 +19,28 @@ import ToBeAuditedBox from './ToBeAuditedBox'
 
 
 class Organizer extends React.Component {
+	constructor(props) {
+    super(props);
+    this.state = {
+        snackbarIsOpen:false,
+                  };
+  }
+  componentDidMount() {
 
+    this.setState({snackbarIsOpen: !this.state.snackbarIsOpen})
+  }
 
  render() {
     return (
       <div>
       <ToBeAuditedBox/>
       <StatusBox/>
-      
+       <Snackbar
+          show={this.state.snackbarIsOpen}
+          onClose={evt => this.setState({snackbarIsOpen: false})}
+          message="Welcome"
+          actionText="Dismiss"
+            />
      </div>
     );
   }

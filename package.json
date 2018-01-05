@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "lodash.filter": "^4.6.0",
     "lodash.get": "^4.4.2",
     "material-ui-datatables": "^0.18.2",
     "material-ui-rating": "^1.4.1",

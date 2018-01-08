@@ -56,7 +56,7 @@ handleRating = (keyLabel, rating) =>{
 
  render() {
     return (
-      <div>      
+      <div className="auditeeBox">      
 	      <MuiThemeProvider>
 		       <List>
 				<ListItem ripple>		

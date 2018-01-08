@@ -1,0 +1,19 @@
+{
+    "userlist":[
+     {
+       "name":"tony",
+       "type":"auditor",
+       "password":123
+    },
+    { 
+       "name":"mat",
+       "type":"organizer",
+       "password":123
+    },
+     {
+       "name":"luke",
+       "type":"auditee",
+       "password":123
+    }
+  ]
+}    

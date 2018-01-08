@@ -74,6 +74,8 @@ class Auditee extends React.Component {
     
   }	
  render() {
+ 	if(this.state.cellClick)
+ 		 {return (<Redirect from={"/auditor"} to={"/questionnaire"}/>);}
     return (
       <div className="auditeeBox">
       <Typography use="headline" className="title">Auditor Dashboard</Typography>
@@ -111,23 +113,7 @@ class Auditee extends React.Component {
 					message="Welcome"
 					actionText="Dismiss"
 		        />
-		      <Dialog
-  open={this.state.cellClick}
-  onClose={evt => this.setState({cellClick: false})}
->
-  <DialogRoot>
-    <DialogSurface>
-        <DialogHeader>
-          <DialogHeaderTitle>Questionnaire for {this.state.clickedName}</DialogHeaderTitle>
-        </DialogHeader>
-        <DialogBody><Questionnaire/></DialogBody>
-        <DialogFooter>
-            <DialogFooterButton cancel>Cancel</DialogFooterButton>
-        </DialogFooter>
-    </DialogSurface>
-    <DialogBackdrop />
-  </DialogRoot>
-</Dialog>
+
       </div>
     );
   }

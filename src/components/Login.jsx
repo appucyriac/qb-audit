@@ -7,6 +7,7 @@ import { TextField } from 'rmwc/TextField';
 import { Checkbox } from 'rmwc/Checkbox';
 import { Elevation } from 'rmwc/Elevation';
 import { Typography } from 'rmwc/Typography';
+import users from '../assets/users.json';
 import {
   BrowserRouter,
   Route,
@@ -14,36 +15,47 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
+let type="";
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     	          username:"",
                   password:"",
-                  isLogged:false
+                  type:""
                   };
-    this.handleSubmit = this.handleSubmit.bind(this);
+                  this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
-  
-    console.log(this.state) ;
-    if(this.state.username == "auditee" || this.state.username == "auditor" || this.state.username == "organizer")
-       this.setState({isLogged:true});
-    else 
-       alert("invalid username");
-    
+  	const name=this.state.username;
+  	const pass=this.state.password;
+    users.userlist.map(function(value){
+
+    	       if((name == value.name) && (pass ==value.password))
+    	       	   {
+    	       	   	if (value.type =="auditee")
+                      type ="auditee";
+                    if (value.type =="auditor")
+                       type ="auditor";
+                    if (value.type =="organizer")
+                      type ="organizer";
+    	       	   }                   
+                  })
+    if(type =="")
+      alert("invalid user name or password")
+    else
+      {
+      	 this.setState({type:type});
+         localStorage.setItem('isLogged',true);
+      }
     
   }
 
   render() {
-  	const logged = this.state.isLogged;
-  	if(logged && this.state.username == "auditee")
-  		 return (<Redirect from={"/login"} to={"/auditee"}/>);
-  	else if (logged && this.state.username == "auditor")
-  		 return (<Redirect from={"/login"} to={"/auditor"}/>);
-  	else if (logged && this.state.username == "organizer")
-  		 return (<Redirect from={"/login"} to={"/organizer"}/>);
+  	if(this.state.type != "")
+  		 return (<Redirect from={"/login"} to={"/"+this.state.type}/>);
+
   	else{
     return (
       <div className="formBox">

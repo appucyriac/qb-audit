@@ -25,7 +25,7 @@ module.exports = {
         ]
       },
       resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx','.jpg']
       },
       plugins: [
         // Configure HtmlPlugin to use our own index.html file

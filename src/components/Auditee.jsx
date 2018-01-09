@@ -11,7 +11,11 @@ import DataTables from 'material-ui-datatables';
 import { Grid,GridCell } from 'rmwc/Grid';
 import { Snackbar } from 'rmwc/Snackbar';
 import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider' 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import auditee from '../assets/auditee.json';
+let id=0;
+let results =[];
+let newItem={};
 const TABLE_COLUMNS = [
   {
     key: 'rating',
@@ -26,17 +30,7 @@ const TABLE_COLUMNS = [
   }
 ]
  
-const TABLE_DATA = [
-  {
-    rating: '3',
-    duration: 'April 2017 - November 2017',
-    comment: 'Half Yearly'
-  }, {
-    rating: '4',
-    duration: 'December 2016 - April 2017',
-    comment: 'Half Yearly'
-   
-  }
+let TABLE_DATA = [
 
 ]
 class Auditee extends React.Component {
@@ -45,6 +39,23 @@ class Auditee extends React.Component {
     this.state = {
         snackbarIsOpen:false
                   };
+    id=localStorage.getItem('id');
+    auditee.auditeeList.map(function(value){
+               
+    	       if(value.id == id)
+    	       	   {
+    	       	   	TABLE_DATA =[];
+    	       	   	value.history.map(function(data){
+                    
+    	       	   	newItem={
+    	       	   		rating: data.aggregate,
+    	       	   		duration:data.duration,
+    	       	   		comment:data.comment
+    	       	   	};
+    	       	   	TABLE_DATA.push(newItem);
+                    })
+    	       	   }                   
+                  })
   }
 
 	
@@ -57,9 +68,6 @@ class Auditee extends React.Component {
   }
  render() {
     return (
-      
-      
-
       <div className="auditeeBox">
       <Typography use="headline" className="title">Auditee Dashboard</Typography>
 	      <Card className="userImage">

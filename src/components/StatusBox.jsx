@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DataTables from 'material-ui-datatables';
 import { Typography } from 'rmwc/Typography';
+import auditee from '../assets/auditee.json';
 import {
   Dialog,
   DefaultDialogTemplate,
@@ -21,7 +22,7 @@ const TABLE_STATUS_COLS = [
   {
     key: 'name',
     label: 'Name',
-    type:'select',
+    type:'select'
   },
   {
     key: 'auditor',
@@ -35,30 +36,37 @@ const TABLE_STATUS_COLS = [
   },
     {
     key: 'rating',
-    label: 'Rating',
+    label: 'Rating'
+    
+  },
+  {
+    key: 'duration',
+    label: 'Duration'
     
   },
       {
     key: 'final_status',
-    label: 'Final Status',
-    
+    label: 'Final Status'
+   
   }
 ]
  
 const TABLE_STATUS_DATA = [
   {
-    name: 'Deadpool',
-    auditor:'Bruce',
+    name: 'Luke',
+    auditor:'Tony',
     progress:'In Progress',
     rating:'3',
+    duration:'April 2017 - November 2017',
     final_status:'Not Completed'
     
 
   }, {
-    name: 'Tony Stark',
-    auditor:'Peter',
+    name: 'Luke',
+    auditor:'Tony',
     progress:'In Progress',
     rating:'4',
+    duration:'December 2016 - April 2017',
     final_status:'Not Completed'
    
   }
@@ -70,13 +78,28 @@ constructor(props) {
     this.state = {
         simpleDialogIsOpen:false,
         clickedName:null,
+        clickedId:0,
+        clickedDuration:"",
         searchResults:TABLE_STATUS_DATA,
                   };
   }
 onCellClick(tableRow, tableColumn, dataItem, dataItemField){
+	let id=0,
+	    duration="";
 	this.setState({simpleDialogIsOpen:true,clickedName:dataItem.name});
+	auditee.auditeeList.map(function(value){
 
-	
+    	       if(value.name == dataItem.name)
+    	       	   {
+                      id=value.id;
+                     duration=dataItem.duration;
+                    }
+    	       	                 
+                  })
+
+	this.setState({clickedId:id});
+
+	this.setState({clickedDuration:duration});
 }
 handleFilterValueChange(args) {
     debugger
@@ -117,7 +140,7 @@ handleFilterValueChange(args) {
         <DialogHeader>
           <DialogHeaderTitle>Status of {this.state.clickedName}</DialogHeaderTitle>
         </DialogHeader>
-        <DialogBody><Status/></DialogBody>
+        <DialogBody><Status auditeeId={this.state.clickedId} duration={this.state.clickedDuration}/></DialogBody>
         <DialogFooter>
             <DialogFooterButton cancel>Cancel</DialogFooterButton>
         </DialogFooter>

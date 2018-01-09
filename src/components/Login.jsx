@@ -15,13 +15,13 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
-let type="";
+let type="",
+    id=0;
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     	          username:"",
-                  password:"",
                   type:""
                   };
                   this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,10 +30,13 @@ class Login extends React.Component {
   handleSubmit(event) {
   	const name=this.state.username;
   	const pass=this.state.password;
-    users.userlist.map(function(value){
+  	debugger
+    users.userlist.map((value)=>{
 
-    	       if((name == value.name) && (pass ==value.password))
+    	       if(name == value.name)
     	       	   {
+    	       	   	console.log(this.state);
+    	       	   	id=value.id;
     	       	   	if (value.type =="auditee")
                       type ="auditee";
                     if (value.type =="auditor")
@@ -46,6 +49,7 @@ class Login extends React.Component {
       alert("invalid user name or password")
     else
       {
+      	 localStorage.setItem('id',id);
       	 this.setState({type:type});
          localStorage.setItem('isLogged',true);
       }

@@ -1,4 +1,5 @@
 import React from 'react'
+import Comment from './Comment';
 import '../assets/css/qbaudit-styles.css'
 import '../../node_modules/material-components-web/dist/material-components-web.css'
 import { Button } from 'rmwc/Button';
@@ -8,28 +9,7 @@ import { Rating } from 'material-ui-rating';
 import RatingComponent from './RatingComponent';
 import { List,ListItem,ListItemText } from 'rmwc/List';	
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-const TABLE_COLUMNS = [
-  {
-    key: 'name',
-    label: 'Name',
-  }, {
-    key: 'duration',
-    label: 'Duration',
-  },
-]
-const TABLE_DATA = [
-  {
-    name: 'Deadpool',
-    duration: 'April 2017 - November 2017',
-
-  }, {
-    name: 'Tony Stark',
-    duration: 'December 2016 - April 2017',
-   
-  }
-
-]
-
+import auditee from '../assets/auditee.json';
 class Questionnaire extends React.Component {
 	constructor(props) {
     super(props);
@@ -44,6 +24,29 @@ class Questionnaire extends React.Component {
   }
  handleSubmit(){
    this.setState({snackbarIsOpen: true})
+   let id = localStorage.getItem('id'),
+       duration =localStorage.getItem('duration');
+   console.log(auditee);
+   let currentValues = this.state;
+   let avg= (currentValues.learning+currentValues.ui+currentValues.code+currentValues.test+currentValues.perf)/5;
+   auditee.auditeeList.map(function(value){
+   debugger
+    	       if(value.id == id)
+    	       	   {   	       	   	
+    	       	    
+    	       	    
+    	       	   	value.history.map(function(data){
+    	       	   		if(data.duration==duration)
+    	       	   		{
+                      data.rating.learning=currentValues.learning;
+                      data.rating.ui=currentValues.ui;
+                      data.rating.code=currentValues.code;
+                      data.rating.test=currentValues.test;
+                      data.rating.perf=currentValues.perf;
+                      data.aggregate=avg;}
+                    })
+    	       	    }                  
+                  })
  }
 
 handleRating = (keyLabel, rating) =>{
@@ -56,6 +59,7 @@ handleRating = (keyLabel, rating) =>{
 
  render() {
     return (
+
       <div className="auditeeBox">      
 	      <MuiThemeProvider>
 		       <List>
@@ -88,7 +92,9 @@ handleRating = (keyLabel, rating) =>{
 						message="Submitted"
 						actionText="Dismiss"
 			        />
-      </div>
+			        <Comment/>
+
+     </div>
 
     );
   }

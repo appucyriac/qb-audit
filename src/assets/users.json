@@ -3,17 +3,20 @@
      {
        "name":"tony",
        "type":"auditor",
-       "password":123
+       "id":1
+
     },
     { 
        "name":"mat",
        "type":"organizer",
-       "password":123
+       "id":2
+
     },
      {
        "name":"luke",
        "type":"auditee",
-       "password":123
+       "id":3
+
     }
   ]
 }    

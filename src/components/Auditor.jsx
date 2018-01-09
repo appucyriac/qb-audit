@@ -9,6 +9,7 @@ import { Snackbar } from 'rmwc/Snackbar';
 import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Questionnaire from './Questionnaire';
+import auditee from '../assets/auditee.json';
 import {
   Dialog,
   DefaultDialogTemplate,
@@ -40,11 +41,11 @@ const TABLE_COLUMNS = [
  
 const TABLE_DATA = [
   {
-    name: 'Deadpool',
+    name: 'Luke',
     duration: 'April 2017 - November 2017',
 
   }, {
-    name: 'Tony Stark',
+    name: 'Luke',
     duration: 'December 2016 - April 2017',
    
   }
@@ -68,8 +69,18 @@ class Auditee extends React.Component {
 		this.setState({snackbarIsOpen: !this.state.snackbarIsOpen})
   }
   handleCellClick = (tableRow, tableColumn, dataItem, dataItemField) =>{
-     
+     debugger
      	this.setState({cellClick:true,clickedName:dataItem.name});
+
+     	    auditee.auditeeList.map(function(value){
+
+    	       if(value.name == dataItem.name)
+    	       	   {
+    	       	   	localStorage.setItem('id',value.id);
+    	       	   	localStorage.setItem('duration',dataItem.duration);
+                    }
+    	       	                 
+                  })
      	
     
   }	

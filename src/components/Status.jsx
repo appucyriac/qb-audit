@@ -13,8 +13,10 @@ import { Grid,GridCell } from 'rmwc/Grid';
 import { Snackbar } from 'rmwc/Snackbar';
 import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
 import { List,ListItem,ListItemText } from 'rmwc/List';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider' 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider' ;
+import auditee from '../assets/auditee.json';
 const Auditor_List =[{name:'Bruce'},{name:'Peter'},{name:'Vision'}]
+
 
 class Status extends React.Component {
 constructor(props) {
@@ -24,8 +26,26 @@ constructor(props) {
                   };
   }
 handleCompleted(value){
+  
+  
   debugger
+  let duration =this.props.duration,
+      id=this.props.auditeeId;
  this.setState({completed:"Completed"});
+ auditee.auditeeList.map(function(value){
+   debugger
+             if(value.id == id)
+                 {                
+                  
+                  
+                  value.history.map(function(data){
+                  if(data.duration==duration)
+                  {
+                    data.status= "Completed";
+                  }
+                })
+              }})
+ console.log(auditee);
 }
 
  render() {

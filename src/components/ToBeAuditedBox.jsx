@@ -9,17 +9,44 @@ import { Checkbox } from 'rmwc/Checkbox';
 import { Elevation } from 'rmwc/Elevation';
 import { Typography } from 'rmwc/Typography';
 import DataTables from 'material-ui-datatables';  
-
 import { Snackbar } from 'rmwc/Snackbar';
 import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Select from 'rmwc/Select';
-import StatusBox from './StatusBox'
-const TABLE_COLUMNS = [
+import StatusBox from './StatusBox';
+import auditee from '../assets/auditee.json';
+import auditor from '../assets/auditor.json';
+import users from '../assets/users.json';
+let options =[],
+    auditorName="",
+    selectedAuditorId=0,
+    clickedId=0,
+    clickedDuration="";
+
+ 
+let TABLE_DATA = [
+];
+let TABLE_COLUMNS =[
+];
+
+export default class ToBeAuditedBox extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = {
+        snackbarIsOpen:false,
+        selectedAuditor:"",
+        selectedAuditorId:0,
+        clickedId:0,
+        clickedDuration:""
+                  };
+  TABLE_COLUMNS = [
   {
     key: 'name',
-    label: 'Name',
-    type:'select',
+    label: 'Name'
+  },
+  {
+    key: 'duration',
+    label: 'Duration'
   },
   {
     key: 'auditor',
@@ -27,37 +54,79 @@ const TABLE_COLUMNS = [
     render: (auditor, all) => <Select
         name="form-field-name"
         value='value'
-        options={[
-          { value: 'Bruce', label: 'Bruce' },
-          { value: 'Peter', label: 'Peter' },
-        ]}/>
-  }
-]
- 
-const TABLE_DATA = [
-  {
-    name: 'Deadpool',
-    auditor:'Auditor_List.name'
-  }, {
-    name: 'Tony Stark',
-    auditor:'Auditor_List.name'
-  }
-]
-export default class ToBeAuditedBox extends React.Component {
-    constructor(props) {
-    super(props);
-    this.state = {
-        snackbarIsOpen:false,
-                  };
+        options={options}
+        onChange={this.handleChange.bind(this)}
+         />
+        }];
+    auditor.auditorList.map(function(value){
+      let newItem={value:value.name, label:value.name}
+      options.push(newItem);
+    })
+    TABLE_DATA=[];
+    auditee.auditeeList.map(function(value){
+       value.history.map(function(data){
+         if(data.auditorId == 0)
+         {
+          let newItem ={
+            name:value.name,
+            duration:data.duration,
+            id:value.id
+          }
+          TABLE_DATA.push(newItem);
+         }
+       })
+    })
   }
 
+
+ handleChange(event){
+  
+  users.userlist.map(function(value){
+  if(value.name==event.target.value)
+    {selectedAuditorId=value.id;
+    auditorName=value.name;}
+  })
+  this.setState({selectedAuditorId:selectedAuditorId});
+  this.setState({selectedAuditor:auditorName});
+
+ }
   handleAssign(value){
     debugger
-    this.setState({snackbarIsOpen:true});
+        let id=this.state.clickedId,
+              duration=this.state.clickedDuration,
+              auditorId=this.state.selectedAuditorId;
+              auditorName=this.state.selectedAuditor;
+         auditee.auditeeList.map(function(value){
+
+             if(value.id== id)
+                 {
+                  value.history.map(function(data){
+                   if(data.duration== duration)
+                      {
+                        data.auditorId=auditorId;
+                        data.auditorName=auditorName;}
+                  })
+                 }
+              })
+         this.setState({snackbarIsOpen:true});
+
+  }
+  onCellClick(tableRow, tableColumn, dataItem, dataItemField){
+         users.userlist.map(function(value){
+           if(value.name == dataItem.name)
+            {   
+                 clickedId=value.id,
+                 clickedDuration=dataItem.duration;
+            }
+         })
+         this.setState({clickedId:clickedId});
+         this.setState({clickedDuration:clickedDuration});
+
   }
 
   render() {
     return (
+
       <div className="auditeeBox">
       <Typography use="headline" className="title">Organizer Dashboard</Typography>
         <Card className="userImage">
@@ -76,12 +145,12 @@ export default class ToBeAuditedBox extends React.Component {
           <MuiThemeProvider> 
               <DataTables
                 height={'auto'}
-                selectable={true}
+                selectable={false}
                 showRowHover={true}
                 columns={TABLE_COLUMNS}
                 data={TABLE_DATA}
-                showCheckboxes={true}
-                onCellDoubleClick={this.handleCellDoubleClick}
+                showCheckboxes={false}
+                onCellClick={this.onCellClick.bind(this)}
                 page={1}
                 count={100}
               />

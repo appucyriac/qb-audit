@@ -15,15 +15,27 @@ import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
 import { List,ListItem,ListItemText } from 'rmwc/List';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider' ;
 import auditee from '../assets/auditee.json';
-const Auditor_List =[{name:'Bruce'},{name:'Peter'},{name:'Vision'}]
-
+let status="";
 
 class Status extends React.Component {
 constructor(props) {
     super(props);
-    this.state = {
-      completed:"Not Completed"
+
+    let id=this.props.auditeeId;
+    auditee.auditeeList.map(function(value){
+             if(value.id == id)
+                 {                                
+                  value.history.map(function(data){
+                  if(data.duration==duration)
+                  {
+                    status = data.status;
+                  }
+                })
+              }})
+        this.state = {
+      completed:status
                   };
+
   }
 handleCompleted(value){
   
@@ -31,6 +43,7 @@ handleCompleted(value){
   debugger
   let duration =this.props.duration,
       id=this.props.auditeeId;
+
  this.setState({completed:"Completed"});
  auditee.auditeeList.map(function(value){
    debugger

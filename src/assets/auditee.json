@@ -15,7 +15,9 @@
                            "perf":5       },
                            "aggregate":0,
                            "comment":"",
-                           "status":"Not Completed"
+                           "status":"Not Completed",
+                           "auditorId":0,
+                           "auditorName":""
                       },
                       {
                          "duration":"December 2016 - April 2017",
@@ -28,7 +30,9 @@
                            "perf":5       },
                            "aggregate":0,
                            "comment":"",
-                           "status":"Not Completed"
+                           "status":"Not Completed",
+                           "auditorId":0,
+                           "auditorName":""
                       }
 
                   ]

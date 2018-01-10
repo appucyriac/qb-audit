@@ -38,8 +38,9 @@ class App extends React.Component {
 
  render() {
      const session = localStorage.getItem("isLogged");
+     let   type=localStorage.getItem("type");
     if(session=="true")
-    	sessionButton=<nav><Link to="/login"><Button onClick={this.handleLogout.bind(this)}>Logout</Button></Link><Link to="/"><Button>Home</Button></Link></nav>;
+    	sessionButton=<nav><Link to="/login"><Button onClick={this.handleLogout.bind(this)}>Logout</Button></Link><Link to={"/"+type}><Button>Dashboard</Button></Link></nav>;
     else
     	sessionButton=<nav><Link to="/login"><Button>Login</Button></Link><Link to="/"><Button>Home</Button></Link></nav>;
 

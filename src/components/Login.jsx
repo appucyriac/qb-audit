@@ -31,16 +31,16 @@ class Login extends React.Component {
   	const name=this.state.username;
   	const pass=this.state.password;
   	debugger
-    users.userlist.map((value)=>{
+    users.userlist.map(function(value){
 
     	       if(name == value.name)
     	       	   {
-    	       	   	console.log(this.state);
     	       	   	id=value.id;
     	       	   	if (value.type =="auditee")
                       type ="auditee";
                     if (value.type =="auditor")
-                       type ="auditor";
+                       {type ="auditor";
+                        localStorage.setItem('userId',value.id);}
                     if (value.type =="organizer")
                       type ="organizer";
     	       	   }                   
@@ -52,6 +52,7 @@ class Login extends React.Component {
       	 localStorage.setItem('id',id);
       	 this.setState({type:type});
          localStorage.setItem('isLogged',true);
+         localStorage.setItem('type',type);
       }
     
   }

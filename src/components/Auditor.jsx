@@ -39,18 +39,8 @@ const TABLE_COLUMNS = [
   },
 ]
  
-const TABLE_DATA = [
-  {
-    name: 'Luke',
-    duration: 'April 2017 - November 2017',
-
-  }, {
-    name: 'Luke',
-    duration: 'December 2016 - April 2017',
-   
-  }
-
-]
+let TABLE_DATA = [
+];
 
 class Auditee extends React.Component {
 	constructor(props) {
@@ -65,8 +55,25 @@ class Auditee extends React.Component {
 
 	
 	componentDidMount() {
+		TABLE_DATA=[];
 
 		this.setState({snackbarIsOpen: !this.state.snackbarIsOpen})
+		let auditorId =localStorage.getItem('userId');
+		auditee.auditeeList.map(function(value){
+               value.history.map(function(data){
+               if(data.aggregate==0)
+               {
+    	       if(data.auditorId == auditorId)
+    	       	   {
+    	       	   	 let newitem={name:value.name,
+                                  duration:data.duration
+    	       	   	  }
+                     TABLE_DATA.push(newitem);
+                    }
+                }
+    	       	   })              
+                  })
+     	
   }
   handleCellClick = (tableRow, tableColumn, dataItem, dataItemField) =>{
      debugger

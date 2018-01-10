@@ -1,19 +1,19 @@
 {
     "userlist":[
      {
-       "name":"tony",
+       "name":"Tony",
        "type":"auditor",
        "id":1
 
     },
     { 
-       "name":"mat",
+       "name":"Mat",
        "type":"organizer",
        "id":2
 
     },
      {
-       "name":"luke",
+       "name":"Luke",
        "type":"auditee",
        "id":3
 

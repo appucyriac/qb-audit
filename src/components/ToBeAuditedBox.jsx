@@ -63,8 +63,7 @@ export default class ToBeAuditedBox extends React.Component {
       options.push(newItem);
     })
     TABLE_DATA=[];
-    let auditees =JSON.parse(localStorage.getItem('auditee'));
-    auditees.auditeeList.map(function(value){
+    auditee.auditeeList.map(function(value){
        value.history.map(function(data){
          if(data.auditorId == 0)
          {

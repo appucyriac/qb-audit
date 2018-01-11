@@ -34,7 +34,6 @@ class Comment extends React.Component {
    })}
    })
    this.setState({snackbarIsOpen: true})
-   localStorage.setItem('auditee',JSON.stringify(auditee));
  }
 
 

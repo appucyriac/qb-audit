@@ -44,7 +44,7 @@ class Questionnaire extends React.Component {
                     })
     	       	    }                  
                   })
-   localStorage.setItem('auditee',JSON.stringify(auditee));
+   
  }
 
 handleRating = (keyLabel, rating) =>{

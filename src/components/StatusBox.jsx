@@ -61,8 +61,8 @@ constructor(props) {
     super(props);
     TABLE_STATUS_DATA=[];
     let newItem={};
-    let auditees =JSON.parse(localStorage.getItem('auditee'));
-    auditees.auditeeList.map(function(value){
+
+    auditee.auditeeList.map(function(value){
        value.history.map(function(data){
           let newItem={
           	name:value.name,

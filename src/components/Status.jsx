@@ -41,7 +41,6 @@ handleCompleted(value){
                   }
                 })
               }})
- localStorage.setItem('auditee',JSON.stringify(auditee));
 }
 
  render() {

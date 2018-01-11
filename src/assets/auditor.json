@@ -1,21 +1,9 @@
 {
     "auditorList":[
-     {
+     {  
        "id":1,
        "name":"Tony",
-       "toBeAudited":[
-                          {
-                         "id":3,
-                         "duration":"April 2017 - November 2017",
-                         "name":"Luke"
-                      },
-                      {
-                         
-                         "id":3,
-                         "duration":"December 2016 - April 2017",
-                         "name":"Luke"
-
-                  }]
+       "toBeAudited":[]
     }
   ]
 }    

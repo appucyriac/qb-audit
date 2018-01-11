@@ -56,10 +56,10 @@ class Auditee extends React.Component {
 	
 	componentDidMount() {
 		TABLE_DATA=[];
-
+        let auditees =JSON.parse(localStorage.getItem('auditee'));
 		this.setState({snackbarIsOpen: !this.state.snackbarIsOpen})
 		let auditorId =localStorage.getItem('userId');
-		auditee.auditeeList.map(function(value){
+		auditees.auditeeList.map(function(value){
                value.history.map(function(data){
                if(data.aggregate==0)
                {
@@ -130,6 +130,7 @@ class Auditee extends React.Component {
 					onClose={evt => this.setState({snackbarIsOpen: false})}
 					message="Welcome"
 					actionText="Dismiss"
+
 		        />
 
       </div>

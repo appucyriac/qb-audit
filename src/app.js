@@ -62,6 +62,7 @@ class App extends React.Component {
 	onClose={evt => this.setState({snackbarIsOpen: false})}
     message="Successfully Logged Out"
     actionText="Dismiss"
+    timeout="500"
     />
   </div>
   );

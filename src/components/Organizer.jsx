@@ -40,6 +40,7 @@ class Organizer extends React.Component {
           onClose={evt => this.setState({snackbarIsOpen: false})}
           message="Welcome"
           actionText="Dismiss"
+          timeout="500"
             />
      </div>
     );

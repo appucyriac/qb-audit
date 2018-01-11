@@ -8,11 +8,11 @@
                          "duration":"April 2017 - November 2017",
                          "rating":{
 
-                           "learning":3,
-                           "ui":4,
-                           "code":5,
-                           "test":5,
-                           "perf":5       },
+                                   "learning":3,
+                                   "ui":4,
+                                   "code":5,
+                                   "test":5,
+                                   "perf":5       },
                            "aggregate":0,
                            "comment":"",
                            "status":"Not Completed",
@@ -23,11 +23,11 @@
                          "duration":"December 2016 - April 2017",
                          "rating":{
 
-                           "learning":3,
-                           "ui":4,
-                           "code":5,
-                           "test":5,
-                           "perf":5       },
+                                   "learning":3,
+                                   "ui":4,
+                                   "code":5,
+                                   "test":5,
+                                   "perf":5       },
                            "aggregate":0,
                            "comment":"",
                            "status":"Not Completed",

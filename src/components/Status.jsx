@@ -15,31 +15,16 @@ import {Card,CardMedia,CardTitle,CardSubtitle,CardPrimary} from 'rmwc/Card';
 import { List,ListItem,ListItemText } from 'rmwc/List';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider' ;
 import auditee from '../assets/auditee.json';
-let status="";
-
+let st="";
 class Status extends React.Component {
 constructor(props) {
     super(props);
-
-    let id=this.props.auditeeId;
-    auditee.auditeeList.map(function(value){
-             if(value.id == id)
-                 {                                
-                  value.history.map(function(data){
-                  if(data.duration==duration)
-                  {
-                    status = data.status;
-                  }
-                })
-              }})
-        this.state = {
-      completed:status
+      this.state = {
+      completed:this.props.status
                   };
-
+    st=this.props.status;
   }
-handleCompleted(value){
-  
-  
+handleCompleted(value){  
   debugger
   let duration =this.props.duration,
       id=this.props.auditeeId;
@@ -48,9 +33,7 @@ handleCompleted(value){
  auditee.auditeeList.map(function(value){
    debugger
              if(value.id == id)
-                 {                
-                  
-                  
+                 {                                  
                   value.history.map(function(data){
                   if(data.duration==duration)
                   {
@@ -58,7 +41,7 @@ handleCompleted(value){
                   }
                 })
               }})
- console.log(auditee);
+ localStorage.setItem('auditee',JSON.stringify(auditee));
 }
 
  render() {
@@ -67,16 +50,13 @@ handleCompleted(value){
 	        <MuiThemeProvider> 
           <List>
              <ListItem ripple>   
-              <ListItemText>Half yearly</ListItemText>     
-             </ListItem>
-             <ListItem ripple>      
-              <ListItemText>Inprogress</ListItemText>
+              <ListItemText>Duration : {this.props.duration}</ListItemText>     
              </ListItem>
             <ListItem ripple>      
-              <ListItemText>Aggregate rating</ListItemText>       
+              <ListItemText>Aggregate Rating : {this.props.rating}</ListItemText>       
             </ListItem>
             <ListItem ripple>      
-              <ListItemText>{this.state.completed}</ListItemText>          
+              <ListItemText>Final Status : {this.state.completed}</ListItemText>          
              </ListItem>
          </List>
 		      <Button raised theme={['secondary-bg', 'text-primary-on-secondary']} className="assignButton" onClick={this.handleCompleted.bind(this)}>Mark as completed</Button>

@@ -18,6 +18,7 @@ import {
 import Status from './Status';
 import get from 'lodash/get';
 import filter from 'lodash/filter';
+let final_status="";
 const TABLE_STATUS_COLS = [
   {
     key: 'name',
@@ -29,14 +30,15 @@ const TABLE_STATUS_COLS = [
     label: 'Auditor'
     
   },
-  {
-    key: 'progress',
-    label: 'Progress',
-    
-  },
+
     {
     key: 'rating',
     label: 'Rating'
+    
+  },
+    {
+    key: 'comment',
+    label: 'Comment',
     
   },
   {
@@ -57,38 +59,52 @@ export default class StatusBox extends Component {
   
 constructor(props) {
     super(props);
-    this.state = {
-        simpleDialogIsOpen:false,
-        clickedName:null,
-        clickedId:0,
-        clickedDuration:"",
-        searchResults:TABLE_STATUS_DATA,
-                  };
     TABLE_STATUS_DATA=[];
-    auditee.auditeeList.map(function(value){
+    let newItem={};
+    let auditees =JSON.parse(localStorage.getItem('auditee'));
+    auditees.auditeeList.map(function(value){
        value.history.map(function(data){
           let newItem={
           	name:value.name,
           	auditor:data.auditorName,
           	rating:data.aggregate,
-          	progress:"",
+          	comment:data.comment,
           	duration:data.duration,
           	final_status:data.status
           }
           TABLE_STATUS_DATA.push(newItem);
+          
        })
     })
+        this.state = {
+        simpleDialogIsOpen:false,
+        clickedName:null,
+        clickedId:0,
+        clickedDuration:"",
+        aggregateRating:0,
+        searchResults:TABLE_STATUS_DATA
+                  };
+    
   }
 onCellClick(tableRow, tableColumn, dataItem, dataItemField){
 	let id=0,
-	    duration="";
+	    duration="",
+	    rating=0;
 	this.setState({simpleDialogIsOpen:true,clickedName:dataItem.name});
 	auditee.auditeeList.map(function(value){
-
+               
     	       if(value.name == dataItem.name)
     	       	   {
-                      id=value.id;
+    	       	   	value.history.map(function(data){
+                      if(data.duration==dataItem.duration)
+                      {
+                     id=value.id;
                      duration=dataItem.duration;
+                     rating=dataItem.rating;
+                     final_status=dataItem.final_status;
+                      }
+    	       	   	})
+
                     }
     	       	                 
                   })
@@ -96,6 +112,7 @@ onCellClick(tableRow, tableColumn, dataItem, dataItemField){
 	this.setState({clickedId:id});
 
 	this.setState({clickedDuration:duration});
+	this.setState({aggregateRating:rating});
 }
 handleFilterValueChange(args) {
     debugger
@@ -116,7 +133,7 @@ handleFilterValueChange(args) {
 		        selectable={false}
 		        showRowHover={true}
 		        columns={TABLE_STATUS_COLS}
-		        data={TABLE_STATUS_DATA}
+		        data={this.state.searchResults}
 		        showCheckboxes={false}
 		        showHeaderToolbar
 		        onCellClick={this.onCellClick.bind(this)}
@@ -136,7 +153,7 @@ handleFilterValueChange(args) {
         <DialogHeader>
           <DialogHeaderTitle>Status of {this.state.clickedName} for {this.state.clickedDuration}</DialogHeaderTitle>
         </DialogHeader>
-        <DialogBody><Status auditeeId={this.state.clickedId} duration={this.state.clickedDuration}/></DialogBody>
+        <DialogBody><Status auditeeId={this.state.clickedId} duration={this.state.clickedDuration} rating={this.state.aggregateRating} status={final_status}/></DialogBody>
         <DialogFooter>
             <DialogFooterButton cancel>Cancel</DialogFooterButton>
         </DialogFooter>

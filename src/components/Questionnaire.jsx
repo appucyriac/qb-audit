@@ -10,6 +10,7 @@ import RatingComponent from './RatingComponent';
 import { List,ListItem,ListItemText } from 'rmwc/List';	
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import auditee from '../assets/auditee.json';
+
 class Questionnaire extends React.Component {
 	constructor(props) {
     super(props);
@@ -19,24 +20,20 @@ class Questionnaire extends React.Component {
                code:0,
                test:0,
                perf:0,
-               snackbarIsOpen:false
+               snackbarIsOpen:false,
                   };
   }
+
  handleSubmit(){
    this.setState({snackbarIsOpen: true})
-   let id = localStorage.getItem('id'),
-       duration =localStorage.getItem('duration');
    console.log(auditee);
-   let currentValues = this.state;
-   let avg= (currentValues.learning+currentValues.ui+currentValues.code+currentValues.test+currentValues.perf)/5;
+   let currentValues = this.state,
+       avg= (currentValues.learning+currentValues.ui+currentValues.code+currentValues.test+currentValues.perf)/5;
    auditee.auditeeList.map(function(value){
-   debugger
-    	       if(value.id == id)
-    	       	   {   	       	   	
-    	       	    
-    	       	    
+    	       if(value.id == localStorage.getItem('id'))
+    	       	   {   	       	   	   	       	    
     	       	   	value.history.map(function(data){
-    	       	   		if(data.duration==duration)
+    	       	   		if(data.duration==localStorage.getItem('duration'))
     	       	   		{
                       data.rating.learning=currentValues.learning;
                       data.rating.ui=currentValues.ui;
@@ -47,6 +44,7 @@ class Questionnaire extends React.Component {
                     })
     	       	    }                  
                   })
+   localStorage.setItem('auditee',JSON.stringify(auditee));
  }
 
 handleRating = (keyLabel, rating) =>{
@@ -91,11 +89,10 @@ handleRating = (keyLabel, rating) =>{
 						onClose={evt => this.setState({snackbarIsOpen: false})}
 						message="Submitted"
 						actionText="Dismiss"
+						timeout="500"
 			        />
-			        <Comment/>
-
+			        <Comment id={localStorage.getItem('id')} duration={localStorage.getItem('duration')}/>
      </div>
-
     );
   }
 }

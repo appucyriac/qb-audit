@@ -40,7 +40,8 @@ class Auditee extends React.Component {
         snackbarIsOpen:false
                   };
     id=localStorage.getItem('id');
-    auditee.auditeeList.map(function(value){
+    let auditees =JSON.parse(localStorage.getItem('auditee'));
+    auditees.auditeeList.map(function(value){
                
     	       if(value.id == id)
     	       	   {
@@ -106,6 +107,7 @@ class Auditee extends React.Component {
 					onClose={evt => this.setState({snackbarIsOpen: false})}
 					message="Welcome"
 					actionText="Dismiss"
+
 		        />
       </div>
     );

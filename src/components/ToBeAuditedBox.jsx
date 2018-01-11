@@ -63,7 +63,8 @@ export default class ToBeAuditedBox extends React.Component {
       options.push(newItem);
     })
     TABLE_DATA=[];
-    auditee.auditeeList.map(function(value){
+    let auditees =JSON.parse(localStorage.getItem('auditee'));
+    auditees.auditeeList.map(function(value){
        value.history.map(function(data){
          if(data.auditorId == 0)
          {
@@ -109,6 +110,7 @@ export default class ToBeAuditedBox extends React.Component {
                  }
               })
          this.setState({snackbarIsOpen:true});
+         localStorage.setItem('auditee',JSON.stringify(auditee));
 
   }
   onCellClick(tableRow, tableColumn, dataItem, dataItemField){
@@ -161,6 +163,7 @@ export default class ToBeAuditedBox extends React.Component {
           onClose={evt => this.setState({snackbarIsOpen: false})}
           message="Auditor assigned"
           actionText="Dismiss"
+          timeout="500"
             />
       </div>
     );

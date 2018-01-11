@@ -9,27 +9,7 @@ import { FormField } from 'rmwc/FormField';
 import { TextField } from 'rmwc/TextField';
 import { List,ListItem,ListItemText } from 'rmwc/List';	
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-const TABLE_COLUMNS = [
-  {
-    key: 'name',
-    label: 'Name',
-  }, {
-    key: 'duration',
-    label: 'Duration',
-  },
-]
-const TABLE_DATA = [
-  {
-    name: 'Deadpool',
-    duration: 'April 2017 - November 2017',
-
-  }, {
-    name: 'Tony Stark',
-    duration: 'December 2016 - April 2017',
-   
-  }
-
-]
+import auditee from '../assets/auditee.json';
 
 class Comment extends React.Component {
 	constructor(props) {
@@ -37,22 +17,30 @@ class Comment extends React.Component {
     this.state = {
       comment:""
                   };
+
   }
  handleSubmit(){
+      let id=this.props.id,
+        duration=this.props.duration;
+   let comment=this.state.comment;
+   auditee.auditeeList.map(function(value){
+   if(value.id==id)
+  {
+   value.history.map(function(data){
+    if(data.duration==duration)
+    {
+    data.comment=comment;
+  }
+   })}
+   })
    this.setState({snackbarIsOpen: true})
+   localStorage.setItem('auditee',JSON.stringify(auditee));
  }
 
-handleRating = (keyLabel, rating) =>{
-  this.setState((state) => {
-      let newState = state;
-      newState[keyLabel] = rating;
-      return newState;
-  });
-}
 
  render() {
     return (
-      <div classname="commentBox">
+      <div className="commentBox">
             <label id="commentField">
               <FormField>
               <TextField label="Add Comments" id="commentBox" onChange = {(event,newValue) => this.setState({comment:event.target.value})}/>
@@ -64,6 +52,7 @@ handleRating = (keyLabel, rating) =>{
 						onClose={evt => this.setState({snackbarIsOpen: false})}
 						message="Comment Added"
 						actionText="Dismiss"
+            timeout="500"
 			        />
       </div>
 

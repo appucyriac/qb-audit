@@ -4,15 +4,10 @@
   "description": "",
   "main": "index.js",
   "private": true,
-  "homepage":"https://appucyriac.github.io/qb-audit/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "webpack-dev-server",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "start": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",

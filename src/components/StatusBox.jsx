@@ -115,7 +115,7 @@ onCellClick(tableRow, tableColumn, dataItem, dataItemField){
 	this.setState({aggregateRating:rating});
 }
 handleFilterValueChange(args) {
-    debugger
+    
     if(args==null|| args=="")
     	this.setState({searchResults:TABLE_STATUS_DATA});
     else

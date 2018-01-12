@@ -9,6 +9,7 @@ import { Button } from 'rmwc/Button';
 import { Tabs } from 'rmwc/Tabs';
 import BackgroundImage from 'react-background-image-loader';
 import ReactDOM from 'react-dom';
+import './css/qbaudit-styles.css';
 import {
   HashRouter,
   BrowserRouter,

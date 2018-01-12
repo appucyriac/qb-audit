@@ -76,7 +76,6 @@ class Auditee extends React.Component {
      	
   }
   handleCellClick = (tableRow, tableColumn, dataItem, dataItemField) =>{
-     debugger
      	this.setState({cellClick:true,clickedName:dataItem.name});
 
      	    auditee.auditeeList.map(function(value){

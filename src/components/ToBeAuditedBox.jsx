@@ -91,7 +91,7 @@ export default class ToBeAuditedBox extends React.Component {
 
  }
   handleAssign(value){
-    debugger
+    
         let id=this.state.clickedId,
               duration=this.state.clickedDuration,
               auditorId=this.state.selectedAuditorId;

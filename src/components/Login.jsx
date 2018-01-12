@@ -30,7 +30,6 @@ class Login extends React.Component {
   handleSubmit(event) {
   	const name=this.state.username;
   	const pass=this.state.password;
-  	debugger
     users.userlist.map(function(value){
 
     	       if(name == value.name)

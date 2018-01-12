@@ -25,13 +25,11 @@ constructor(props) {
     st=this.props.status;
   }
 handleCompleted(value){  
-  debugger
   let duration =this.props.duration,
       id=this.props.auditeeId;
 
  this.setState({completed:"Completed"});
  auditee.auditeeList.map(function(value){
-   debugger
              if(value.id == id)
                  {                                  
                   value.history.map(function(data){

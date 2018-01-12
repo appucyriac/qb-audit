@@ -4,13 +4,10 @@
   "description": "",
   "main": "index.js",
   "private": true,
-  "homepage": "https://appucyriac.github.io/qb-audit/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "react-scripts build",
-    "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "build": "webpack",
+    "start": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
@@ -28,7 +25,6 @@
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.0.17",
     "react-select": "^1.1.0",
     "react-star-rating": "^1.4.2",
     "react-star-ratings": "^1.4.1",

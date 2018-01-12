@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 module.exports = {
-    entry: './src/app.js',
+    entry: './src/index.js',
     output: {
       filename: './build/bundle.js',
       path: path.resolve(__dirname, 'dist')
@@ -33,7 +33,7 @@ module.exports = {
         // Check out https://github.com/jantimon/html-webpack-plugin
         // for the full list of options.
         new HtmlPlugin({
-          template: 'index.html'
+          template: 'public/index.html'
         }),
         new ExtractTextPlugin('style.bundle.css'),
       ]

@@ -25,7 +25,7 @@ module.exports = {
         ]
       },
       resolve: {
-        extensions: ['.js', '.jsx','.jpg']
+        extensions: ['.js', '.jsx']
       },
       plugins: [
         // Configure HtmlPlugin to use our own index.html file
@@ -33,7 +33,7 @@ module.exports = {
         // Check out https://github.com/jantimon/html-webpack-plugin
         // for the full list of options.
         new HtmlPlugin({
-          template: 'index.html'
+          template: './public/index.html'
         }),
         new ExtractTextPlugin('style.bundle.css'),
       ]
